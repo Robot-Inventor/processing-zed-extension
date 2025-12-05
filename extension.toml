@@ -1,0 +1,18 @@
+id = "processing"
+name = "Processing"
+version = "0.1.0"
+schema_version = 1
+authors = ["roboin"]
+description = "Processing language support by the Processing language server (requires Processing 4.4.6 or later)."
+repository = "https://github.com/Robot-Inventor/processing-zed-extension"
+
+[grammars.java]
+repository = "https://github.com/tree-sitter/tree-sitter-java"
+rev = "e10607b45ff745f5f876bfa3e94fbcc6b44bdc11"
+
+[language_servers.processing-language-server]
+name = "Processing Language Server"
+languages = ["Processing"]
+
+[language_servers.processing-language-server.language_ids]
+Processing = "Processing"
