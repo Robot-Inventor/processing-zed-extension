@@ -1,6 +1,6 @@
 id = "processing"
 name = "Processing"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["roboin <https://github.com/Robot-Inventor>"]
 description = "Processing language support by the Processing language server (requires Processing 4.4.6 or later)."
