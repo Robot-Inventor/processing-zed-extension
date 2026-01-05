@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use zed_extension_api as zed;
 use zed_extension_api::settings::LspSettings;
 
@@ -39,14 +40,14 @@ impl ProcessingExtension {
             return Ok(path);
         }
 
-        let shell_env: Vec<(String, String)> = worktree.shell_env().into_iter().collect();
+        let shell_env: HashMap<String, String> =
+            worktree.shell_env().into_iter().collect();
         let env_path = ["PROCESSING_PATH", "PROCESSING_BIN", "PROCESSING_CLI"]
             .iter()
             .find_map(|key| {
                 shell_env
-                    .iter()
-                    .find(|(name, _)| name == key)
-                    .map(|(_, value)| value.clone())
+                    .get(*key)
+                    .cloned()
             });
         if let Some(path) = env_path {
             if !path.is_empty() {
