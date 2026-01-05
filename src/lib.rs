@@ -39,10 +39,15 @@ impl ProcessingExtension {
             return Ok(path);
         }
 
-        let env_path = std::env::var("PROCESSING_PATH")
-            .or_else(|_| std::env::var("PROCESSING_BIN"))
-            .or_else(|_| std::env::var("PROCESSING_CLI"))
-            .ok();
+        let shell_env: Vec<(String, String)> = worktree.shell_env().into_iter().collect();
+        let env_path = ["PROCESSING_PATH", "PROCESSING_BIN", "PROCESSING_CLI"]
+            .iter()
+            .find_map(|key| {
+                shell_env
+                    .iter()
+                    .find(|(name, _)| name == key)
+                    .map(|(_, value)| value.clone())
+            });
         if let Some(path) = env_path {
             if !path.is_empty() {
                 self.cached_cli = Some(path.clone());
